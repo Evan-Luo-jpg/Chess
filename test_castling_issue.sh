@@ -8,15 +8,18 @@ echo "Testing Castling Through Check Issue"
 echo "===================================="
 
 # Test the specific position where castling should be illegal
+# Another position
+# rnb1kbnr/pp1pppp1/7p/1p6/2qPP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 4
+# rnb1kbnr/pp1pppp1/7p/qp6/4P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 2 4
 echo ""
 echo "Test: Castling when king is in check"
-echo "FEN: rnb1kbnr/pp1ppppp/8/qp6/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 4"
+echo "FEN: rnb1kbnr/pp1pppp1/7p/1p6/2qPP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 4"
 echo "Move: e1g1"
 echo "Expected: INVALID (king is in check)"
 
 # Create test input
 cat > /tmp/castling_test.in << EOF
-fen rnb1kbnr/pp1ppppp/8/qp6/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 4
+fen rnb1kbnr/pp1pppp1/7p/1p6/2qPP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 4
 move e1g1
 quit
 EOF

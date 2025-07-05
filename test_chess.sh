@@ -67,16 +67,16 @@ total=0
 # Test 1: Basic castling
 echo ""
 if test_position "Basic Kingside Castling" \
-    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" \
+    "rnbqkb1r/ppp2ppp/3p1n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1" \
     "e1g1" "valid"; then
     passed=`expr $passed + 1`
 fi
 total=`expr $total + 1`
 
-# Test 2: Castling when king is in check (should fail)
+# Test 2: Castling through check
 echo ""
 if test_position "Castling When King in Check" \
-    "rnb1kbnr/pp1ppppp/8/qp6/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 4" \
+    "rn1qkbnr/ppp1pppp/8/1b1p4/3BP3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1" \
     "e1g1" "invalid"; then
     passed=`expr $passed + 1`
 fi
@@ -121,7 +121,7 @@ total=`expr $total + 1`
 # Test 7: Pawn promotion
 echo ""
 if test_position "Pawn Promotion" \
-    "rnbqkbnr/ppppppPp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" \
+    "8/6P1/8/8/8/8/8/1K1k4 w - - 0 1" \
     "g7g8q" "valid"; then
     passed=`expr $passed + 1`
 fi
@@ -139,8 +139,8 @@ total=`expr $total + 1`
 # Test 9: Queen check through pieces (should not be possible)
 echo ""
 if test_position "Queen Check Through Pieces" \
-    "rnb1kbnr/pp1ppppp/8/qp6/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 4" \
-    "a5d2" "invalid"; then
+    "rnb1kbnr/pp1pppp1/7p/qp6/3PP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 2 4" \
+    "e1d2" "valid"; then
     passed=`expr $passed + 1`
 fi
 total=`expr $total + 1`
@@ -148,8 +148,8 @@ total=`expr $total + 1`
 # Test 10: Bishop check through pieces (should not be possible)
 echo ""
 if test_position "Bishop Check Through Pieces" \
-    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" \
-    "f1b5" "valid"; then
+    "rnbqk2r/ppppp1pp/5pn1/8/1b1PP3/2P5/PP3PPP/RNBQKBNR w KQkq - 0 1" \
+    "e1d2" "valid"; then
     passed=`expr $passed + 1`
 fi
 total=`expr $total + 1`
