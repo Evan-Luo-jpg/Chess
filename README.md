@@ -9,7 +9,7 @@ A highly optimized chess engine written in C++ using bitboards and step-by-step 
 - **Step-by-Step Sliding Pieces**: Efficient sliding movement for bishops, rooks, and queens
 - **Fast Move Generation**: Optimized move generation using bitwise operations
 - **Alpha-Beta Pruning**: Minimax search with alpha-beta pruning for efficient tree exploration
-- **Quiescence Search**: Capture-only search to avoid horizon effect
+- **Quiescence Search**: Capture-only search to avoid horizon effect with delta pruning for effeciency
 - **Iterative Deepening**: Progressive depth search with time management
 - **Move Ordering**: Intelligent move ordering for better pruning efficiency
 
