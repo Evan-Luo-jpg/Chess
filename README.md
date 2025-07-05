@@ -183,4 +183,4 @@ This project is open source and available under the MIT License.
 
 - Inspired by the "Programming a Chess Engine in C" YouTube tutorial series
 - Uses standard chess evaluation techniques and algorithms
-- Built with modern C++ best practices and optimizations # Chess
+- Built with modern C++ best practices and optimizations
