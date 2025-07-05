@@ -6,7 +6,7 @@ A highly optimized chess engine written in C++ using bitboards and step-by-step 
 
 ### Core Engine
 - **Bitboard Representation**: Uses 64-bit integers to represent the chess board for ultra-fast operations
-- **Step-by-Step Sliding Pieces**: Efficient ray-based movement for bishops, rooks, and queens
+- **Step-by-Step Sliding Pieces**: Efficient sliding movement for bishops, rooks, and queens
 - **Fast Move Generation**: Optimized move generation using bitwise operations
 - **Alpha-Beta Pruning**: Minimax search with alpha-beta pruning for efficient tree exploration
 - **Quiescence Search**: Capture-only search to avoid horizon effect
