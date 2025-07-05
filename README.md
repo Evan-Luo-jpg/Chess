@@ -1,12 +1,12 @@
 # C++ Chess Engine
 
-A highly optimized chess engine written in C++ using bitboards and magic bitboards for fast move generation and evaluation. This engine is inspired by the "Programming a Chess Engine in C" YouTube tutorial series but implemented in modern C++ with additional optimizations.
+A highly optimized chess engine written in C++ using bitboards and step-by-step sliding piece movement for fast move generation and evaluation. This engine is inspired by the "Programming a Chess Engine in C" YouTube tutorial series but implemented in modern C++ with additional optimizations.
 
 ## Features
 
 ### Core Engine
 - **Bitboard Representation**: Uses 64-bit integers to represent the chess board for ultra-fast operations
-- **Magic Bitboards**: Pre-computed lookup tables for sliding piece move generation (bishops and rooks)
+- **Step-by-Step Sliding Pieces**: Efficient ray-based movement for bishops, rooks, and queens
 - **Fast Move Generation**: Optimized move generation using bitwise operations
 - **Alpha-Beta Pruning**: Minimax search with alpha-beta pruning for efficient tree exploration
 - **Quiescence Search**: Capture-only search to avoid horizon effect
@@ -86,7 +86,7 @@ The engine is configured with aggressive optimizations by default:
 
 ```
 === C++ Chess Engine ===
-A highly optimized chess engine using bitboards and magic bitboards
+A highly optimized chess engine using bitboards and step-by-step sliding piece movement
 
 Starting position:
   +---+---+---+---+---+---+---+---+
@@ -122,7 +122,7 @@ Engine plays: e7e5 (depth: 4, score: 15, time: 245ms)
 The engine uses bitboards for efficient board representation:
 - Each piece type and color has its own bitboard
 - Fast bitwise operations for move generation
-- Magic bitboards for sliding pieces (bishops, rooks, queens)
+- Step-by-step ray-based movement for sliding pieces (bishops, rooks, queens)
 
 ### Search Algorithm
 
@@ -140,10 +140,10 @@ The engine uses bitboards for efficient board representation:
 
 ### Performance Optimizations
 
-- **Magic Bitboards**: Pre-computed attack tables for sliding pieces
+- **Step-by-Step Sliding Pieces**: Efficient ray-based attack generation for bishops, rooks, and queens
 - **Bitwise Operations**: Fast bit manipulation using built-in functions
 - **Move Ordering**: Intelligent move ordering for better pruning
-- **Memory Efficiency**: Compact move representation (16 bits per move)
+- **Memory Efficiency**: Compact move representation (16 bits per move) and minimal lookup tables
 - **CPU Optimizations**: Compiler optimizations and CPU-specific instructions
 
 ## Architecture
@@ -163,7 +163,7 @@ src/
 The engine is designed for high performance:
 - **Move Generation**: ~1-2 million moves/second on modern hardware
 - **Search Speed**: ~100k-500k positions/second depending on position complexity
-- **Memory Usage**: Minimal memory footprint (~1MB for lookup tables)
+- **Memory Usage**: Minimal memory footprint (~100KB for lookup tables)
 
 ## Future Improvements
 

@@ -66,13 +66,13 @@ extern Bitboard PAWN_ATTACKS[2][64];
 extern Bitboard KNIGHT_ATTACKS[64];
 extern Bitboard KING_ATTACKS[64];
 
-// Bishop and rook magic tables
-extern Bitboard BISHOP_ATTACKS[64][512];
-extern Bitboard ROOK_ATTACKS[64][4096];
+// Bishop and rook magic tables (deprecated - using step-by-step approach)
+// extern Bitboard BISHOP_ATTACKS[64][512];
+// extern Bitboard ROOK_ATTACKS[64][4096];
 
-// Magic numbers for sliding piece move generation
-extern Bitboard BISHOP_MAGIC[64];
-extern Bitboard ROOK_MAGIC[64];
+// Magic numbers for sliding piece move generation (deprecated)
+// extern Bitboard BISHOP_MAGIC[64];
+// extern Bitboard ROOK_MAGIC[64];
 
 // Utility functions
 namespace BitboardUtils {

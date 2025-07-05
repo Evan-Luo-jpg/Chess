@@ -414,9 +414,13 @@ std::vector<Move> Board::generate_legal_moves() const {
         // Make move temporarily
         Board temp_board = *this;
         temp_board.make_move(move);
-        
-        // Check if king is in check after move
-        if (!temp_board.is_in_check(state.side_to_move)) {
+
+        //If the king is currently in check, check if king isn't after the move
+        // rnb1kbnr/pp1pp1pp/2p2p2/q7/3PP3/5N2/PPPQ1PPP/RNB1KB1R b KQkq - 3 4
+        if (this->is_in_check(state.side_to_move) && !temp_board.is_in_check(state.side_to_move)){
+            legal.push_back(move);
+        }else if(!temp_board.is_in_check(state.side_to_move)) {
+            // Check if king is in check after move
             legal.push_back(move);
         }
     }

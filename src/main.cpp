@@ -18,6 +18,7 @@ void print_help() {
     std::cout << "  eval                - Show current position evaluation\n";
     std::cout << "  legal               - Show all legal moves\n";
     std::cout << "  help                - Show this help\n";
+    std::cout << "  botvsbot            - Has the bot play against itself\n";
     std::cout << "  quit                - Exit the program\n\n";
 }
 
@@ -59,12 +60,24 @@ int main() {
     print_game_status(board);
     print_help();
     
+    //bot vs bot logic
+    bool botvsbot = false;
+    
     std::string command;
     while (true) {
         std::cout << "\n> ";
-        std::getline(std::cin, command);
+        if (botvsbot && !board.is_game_over()){
+            command = "go";
+        }else{
+            std::getline(std::cin, command);
+        }
         
         if (command.empty()) continue;
+
+        if (command == "botvsbot"){
+            command = "go";
+            botvsbot = true;
+        }
         
         if (command == "quit" || command == "exit") {
             break;
