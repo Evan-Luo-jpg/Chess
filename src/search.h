@@ -29,10 +29,10 @@ namespace Search {
     SearchResult search(const Board& board, const SearchParams& params = SearchParams());
     
     // Minimax with alpha-beta pruning
-    int minimax(Board& board, int depth, int alpha, int beta, bool maximizing, int& nodes);
+    int minimax(Board& board, int depth, int alpha, int beta, int& nodes);
     
     // Quiescence search (capture-only search)
-    int quiescence(Board& board, int alpha, int beta, bool maximizing, int& nodes);
+    int quiescence(Board& board, int alpha, int beta, int& nodes);
     
     // Move ordering for better alpha-beta pruning
     void order_moves(std::vector<Move>& moves, const Board& board);

@@ -35,7 +35,7 @@ SearchResult search(const Board& board, const SearchParams& params) {
             Board temp_board = board;
             temp_board.make_move(move);
             
-            int score = -minimax(temp_board, depth - 1, -beta, -alpha, true, result.nodes_searched);
+            int score = -minimax(temp_board, depth - 1, -beta, -alpha, result.nodes_searched);
             
             if (score > best_score) {
                 best_score = score;
@@ -60,7 +60,7 @@ SearchResult search(const Board& board, const SearchParams& params) {
     return result;
 }
 
-int minimax(Board& board, int depth, int alpha, int beta, bool maximizing, int& nodes) {
+int minimax(Board& board, int depth, int alpha, int beta,  int& nodes) {
     nodes++;
     
     // Check for time up
@@ -72,13 +72,13 @@ int minimax(Board& board, int depth, int alpha, int beta, bool maximizing, int& 
     // Terminal node evaluation
     if (depth == 0) {
         if (search_time_up) return 0;
-        return quiescence(board, alpha, beta, maximizing, nodes);
+        return quiescence(board, alpha, beta, nodes);
     }
     
     // Check for game over
     if (board.is_game_over()) {
         if (board.is_checkmate()) {
-            return maximizing ? -100000 : 100000;
+            return -100000 + depth;
         }
         if (board.is_stalemate() || board.is_draw()) {
             return 0;
@@ -88,38 +88,22 @@ int minimax(Board& board, int depth, int alpha, int beta, bool maximizing, int& 
     std::vector<Move> moves = board.generate_legal_moves();
     order_moves(moves, board);
     
-    if (maximizing) {
-        int max_eval = -1000000;
-        for (const Move& move : moves) {
-            if (search_time_up) break;
-            
-            board.make_move(move);
-            int eval = minimax(board, depth - 1, alpha, beta, false, nodes);
-            board.undo_move();
-            
-            max_eval = std::max(max_eval, eval);
-            alpha = std::max(alpha, eval);
-            if (beta <= alpha) break; // Beta cutoff
-        }
-        return max_eval;
-    } else {
-        int min_eval = 1000000;
-        for (const Move& move : moves) {
-            if (search_time_up) break;
-            
-            board.make_move(move);
-            int eval = minimax(board, depth - 1, alpha, beta, true, nodes);
-            board.undo_move();
-            
-            min_eval = std::min(min_eval, eval);
-            beta = std::min(beta, eval);
-            if (beta <= alpha) break; // Alpha cutoff
-        }
-        return min_eval;
+    int best_score  = -1000000;
+    for (const Move& move : moves) {
+        if (search_time_up) break;
+        
+        board.make_move(move);
+        int eval = -minimax(board, depth - 1, -beta, -alpha, nodes);
+        board.undo_move();
+        
+        best_score = std::max(best_score, eval);
+        alpha = std::max(alpha, eval);
+        if (beta <= alpha) break; // Beta cutoff
     }
+    return best_score;
 }
 
-int quiescence(Board& board, int alpha, int beta, bool maximizing, int& nodes) {
+int quiescence(Board& board, int alpha, int beta, int& nodes) {
     nodes++;
     
     // Check for time up
@@ -131,47 +115,34 @@ int quiescence(Board& board, int alpha, int beta, bool maximizing, int& nodes) {
     // Static evaluation
     int stand_pat = Eval::evaluate(board);
     
-    if (maximizing) {
-        if (stand_pat >= beta) return beta;
-        alpha = std::max(alpha, stand_pat);
-    } else {
-        if (stand_pat <= alpha) return alpha;
-        beta = std::min(beta, stand_pat);
+    if (stand_pat >= beta) return beta;
+
+    // Delta pruning - if even capturing the most valuable piece 
+    // can't raise alpha, skip quiescence search
+    const int DELTA_MARGIN = 900; // Roughly queen value
+    if (stand_pat < alpha - DELTA_MARGIN) {
+        return alpha;
     }
+
+    if (stand_pat > alpha) alpha = stand_pat;
     
     // Generate only capture moves
     std::vector<Move> captures = board.generate_captures();
     order_moves(captures, board);
     
-    if (maximizing) {
-        int max_eval = stand_pat;
-        for (const Move& move : captures) {
-            if (search_time_up) break;
-            
-            board.make_move(move);
-            int eval = quiescence(board, alpha, beta, false, nodes);
-            board.undo_move();
-            
-            max_eval = std::max(max_eval, eval);
-            alpha = std::max(alpha, eval);
-            if (beta <= alpha) break;
-        }
-        return max_eval;
-    } else {
-        int min_eval = stand_pat;
-        for (const Move& move : captures) {
-            if (search_time_up) break;
-            
-            board.make_move(move);
-            int eval = quiescence(board, alpha, beta, true, nodes);
-            board.undo_move();
-            
-            min_eval = std::min(min_eval, eval);
-            beta = std::min(beta, eval);
-            if (beta <= alpha) break;
-        }
-        return min_eval;
+    int best_score = stand_pat;
+    for (const Move& move : captures) {
+        if (search_time_up) break;
+        
+        board.make_move(move);
+        int eval = -quiescence(board, -beta, -alpha, nodes);
+        board.undo_move();
+        
+        best_score = std::max(best_score, eval);
+        alpha = std::max(alpha, eval);
+        if (beta <= alpha) break;
     }
+    return best_score;
 }
 
 void order_moves(std::vector<Move>& moves, const Board& board) {
