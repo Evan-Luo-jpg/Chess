@@ -185,3 +185,4 @@ This project is open source and available under the MIT License.
 - Uses standard chess evaluation techniques and algorithms
 - Built with modern C++ best practices and optimizations # Chess
 # Chess
+# Chess
