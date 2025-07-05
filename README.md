@@ -122,7 +122,7 @@ Engine plays: e7e5 (depth: 4, score: 15, time: 245ms)
 The engine uses bitboards for efficient board representation:
 - Each piece type and color has its own bitboard
 - Fast bitwise operations for move generation
-- Step-by-step ray-based movement for sliding pieces (bishops, rooks, queens)
+- Step-by-step movement for sliding pieces (bishops, rooks, queens)
 
 ### Search Algorithm
 
@@ -140,7 +140,7 @@ The engine uses bitboards for efficient board representation:
 
 ### Performance Optimizations
 
-- **Step-by-Step Sliding Pieces**: Efficient ray-based attack generation for bishops, rooks, and queens
+- **Step-by-Step Sliding Pieces**: Efficient step-by-step attack generation for bishops, rooks, and queens
 - **Bitwise Operations**: Fast bit manipulation using built-in functions
 - **Move Ordering**: Intelligent move ordering for better pruning
 - **Memory Efficiency**: Compact move representation (16 bits per move) and minimal lookup tables
