@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/chess_engine.dir/src/main.cpp.o CMakeFiles/chess_engine.dir/src/bitboard.cpp.o CMakeFiles/chess_engine.dir/src/board.cpp.o CMakeFiles/chess_engine.dir/src/movegen.cpp.o CMakeFiles/chess_engine.dir/src/search.cpp.o CMakeFiles/chess_engine.dir/src/eval.cpp.o -o bin/chess_engine 
